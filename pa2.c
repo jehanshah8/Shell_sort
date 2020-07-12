@@ -21,9 +21,9 @@ int main(int argc, char **argv)
 
             double n_comp; 
             Array_Shellsort(arr, size, &n_comp);
-            print_arr(arr, size);
             printf("after\n");
-
+            print_arr(arr, size);
+            
             Array_Save_To_File(argv[3], arr, size);
             //printf("successfull writes = %d\n", successful_wites);
             
