@@ -57,11 +57,27 @@ void Array_Shellsort(long *array, int size, double *n_comp)
 {
     int seq_size;
     long *seq = Generate_2p3q_Seq(size, &seq_size);
+    //printf("starting to sort\n");
+    
+    *n_comp = 0;
     for (int i = seq_size - 1; i >= 0; i--)
     {
-        printf("%ld ", seq[i]);
+        //printf("%ld ", seq[i]);
+        for (long j = seq[i]; j < size; j++)
+        {
+            long temp = array[j];
+            long k = j;
+            *n_comp += 2;
+            while (k >= seq[i] && array[k - seq[i]] > temp)
+            {
+                array[k] = array[k - seq[i]];
+                k = k - seq[i];
+                *n_comp += 2;
+            }
+            array[k] = temp;
+        }
     }
-    printf("\n");
+    //printf("sort finished\n");
     free(seq);
     return;
 }
