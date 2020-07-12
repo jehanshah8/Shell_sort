@@ -3,12 +3,12 @@
 #include "sequence.h"
 
 int static power(int base, int power);
-void static print_seq(long *seq, int seq_size);
+//void static print_seq(long *seq, int seq_size);
 
 long *Generate_2p3q_Seq(int length, int *seq_size)
 {
     // just to b safe
-    *seq_size = 0; 
+    *seq_size = 0;
     // calculates the height of the 2p3q triangle needed
     int height = 0;
     while (power(3, height) <= length)
@@ -30,7 +30,7 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
     int num = power(2, height - 1);
     for (int i = 1; num < length; i++)
     {
-        (*seq_size) += 1;
+        *seq_size += 1;
         num = power(2, height - i) * power(3, i);
     }
     //printf("total seq_size = %d\n", *seq_size);
@@ -39,27 +39,29 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
     long *seq = malloc(sizeof(*seq) * (*seq_size));
     if (seq == NULL)
     {
-        *seq_size = 0; 
+        *seq_size = 0;
         return NULL;
     }
 
+    // populate array
     if (*seq_size > 0)
     {
         seq[0] = 1;
-        height = 1;
-        int p2 = height;
+        int curr_level = 1;
+        int p2 = curr_level;
         int p3 = 0;
 
         int i = 1;
-        while (i < *seq_size)  
+        while (i < *seq_size)
         {
-            if (p3 > 1)
+            // to ensure ascending order but prevent extra numbers from row after last
+            if (p3 > 1 && p2 + 3 <= height)
             {
-                //printf("p2: %d, p3: %d\n", p2 + 3, p3 - 2);
                 seq[i] = power(2, p2 + 3) * power(3, p3 - 2);
                 i++;
             }
 
+            // avoid duplicates 
             if (power(2, p2) * power(3, p3) > seq[i - 1])
             {
                 //printf("p2: %d, p3: %d\n", p2, p3);
@@ -67,10 +69,11 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
                 i++;
             }
 
+            // calculate powers
             if (p2 == 0)
             {
-                height++;
-                p2 = height;
+                curr_level++;
+                p2 = curr_level;
                 p3 = 0;
             }
             else
@@ -80,8 +83,7 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
             }
         }
     }
-
-    print_seq(seq, *seq_size);
+    //print_seq(seq, *seq_size);
     return seq;
 }
 
@@ -100,12 +102,13 @@ int static power(int base, int power)
     return result;
 }
 
+/**
 void static print_seq(long *seq, int seq_size)
 {
-    printf("seq_size = %d\n", seq_size);
     for (int i = 0; i < seq_size; i++)
     {
         printf("%ld ", seq[i]);
     }
     printf("\n");
 }
+*/
