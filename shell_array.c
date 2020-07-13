@@ -27,6 +27,7 @@ long *Array_Load_From_File(char *filename, int *size)
         return NULL;
     }
 
+    // Peer Review: How to validate input?
     int nums_read = 0;
     for (int i = 0; i < *size; i++)
     {

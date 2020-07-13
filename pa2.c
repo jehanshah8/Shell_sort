@@ -13,7 +13,7 @@ int main(int argc, char **argv)
     {
         if (strcmp(argv[1], "-a") == 0)
         {
-            /**
+            /** uncomment to test generate independently
             int seq_size;
             int temp = 3000; 
             long *seq = Generate_2p3q_Seq(temp, &seq_size);

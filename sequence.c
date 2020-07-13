@@ -64,6 +64,7 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
         return NULL;
     }
 
+    // Peer Review: How to generate the sequence in ascending order so that I don't have to sort it later? 
     // populate array
     if (*seq_size > 0)
     {
@@ -91,6 +92,7 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
         }
     }
 
+    // sort the sequence. 
     for (int i = 1; i < *seq_size; i++)
     {
         long temp = seq[i];
