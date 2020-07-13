@@ -1,17 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "sequence.h"
 
 long *Array_Load_From_File(char *filename, int *size)
 {
+    *size = 0;
     FILE *in_file_ptr = NULL;
     in_file_ptr = fopen(filename, "rb");
 
     // check if file was opened successfully
     if (in_file_ptr == NULL)
     {
-        *size = 0;
         return NULL;
     }
 
@@ -42,12 +41,16 @@ int Array_Save_To_File(char *filename, long *array, int size)
 {
     int successful_writes = 0;
     FILE *out_file_ptr = fopen(filename, "wb");
-    if (out_file_ptr != NULL)
+
+    if (out_file_ptr == NULL)
     {
-        for (int i = 0; i < size; i++)
-        {
-            successful_writes += fwrite(array + i, sizeof(*array), 1, out_file_ptr);
-        }
+        return -1;
+    }
+
+    //printf("size = %d", size);
+    for (int i = 0; i < size; i++)
+    {
+        successful_writes += fwrite(array + i, sizeof(*array), 1, out_file_ptr);
     }
     fclose(out_file_ptr);
     return successful_writes;
