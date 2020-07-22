@@ -6,6 +6,7 @@
 typedef struct List
 {
     Node *node;
+    Node *tail; 
     struct List *next;
 } List;
 
@@ -184,7 +185,7 @@ static List *create_sub_lists(Node *head, int size, long k)
     //print_sub_lists(list);
 
     int i = k - 1;
-    Node *temp2 = NULL;
+    //Node *temp2 = NULL;
     while (curr_nd != NULL)
     {
         //printf("i: %d\n", i);
@@ -198,16 +199,18 @@ static List *create_sub_lists(Node *head, int size, long k)
         //printf("inserting %ld...\n", curr_nd->value);
 
         //traverse sublist to find empty spot
-        temp = curr_list->node;
+        /*temp = curr_list->node;
         //printf("temp %ld ...", temp->value);
         while (temp->next != NULL)
         {
             temp = temp->next;
         }
-        temp2 = curr_nd->next;
+        */
+        temp = curr_nd->next;
         curr_nd->next = NULL;
-        temp->next = curr_nd;
-        curr_nd = temp2;
+        curr_list->tail->next = curr_nd;
+        curr_list->tail = curr_list->tail->next; 
+        curr_nd = temp;
 
         //printf("next node %ld...", curr_nd->value);
         curr_list = curr_list->next;
@@ -227,7 +230,7 @@ static List *insert_list(List *list_tail, Node *nd)
     {
         return NULL;
     }
-    *list = (List){.node = nd, .next = NULL};
+    *list = (List){.node = nd, .tail = nd, .next = NULL};
 
     // link it to last if last exists
     if (list_tail != NULL)
@@ -269,15 +272,16 @@ static Node *insertion_sort(Node *head, double *n_comp)
     {
         next = curr->next;
 
+        *n_comp += 1;
         if (sorted == NULL || sorted->value >= curr->value)
         {
-            *n_comp += 1;
             curr->next = sorted;
             sorted = curr;
         }
         else
         {
             temp = sorted;
+            *n_comp += 1;
             while (temp->next != NULL && temp->next->value < curr->value)
             {
                 *n_comp += 1;
