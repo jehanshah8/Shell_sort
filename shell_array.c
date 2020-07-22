@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "shell_array.h"
 #include "sequence.h"
 
 long *Array_Load_From_File(char *filename, int *size)
@@ -71,12 +72,12 @@ void Array_Shellsort(long *array, int size, double *n_comp)
         {
             long temp = array[j];
             long k = j;
-            *n_comp += 2;
+            *n_comp += 1;
             while (k >= seq[i] && array[k - seq[i]] > temp)
             {
                 array[k] = array[k - seq[i]];
                 k = k - seq[i];
-                *n_comp += 2;
+                *n_comp += 1;
             }
             array[k] = temp;
         }

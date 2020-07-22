@@ -2,9 +2,8 @@
 #include <stdlib.h>
 #include "sequence.h"
 
-int static power(int base, int power);
-//void static print_seq(long *seq, int seq_size);
-//void check_next_level(long *seq, int *i, int p2, int p3, int length, long max);
+static int power(int base, int power);
+//static void print_seq(long *seq, int seq_size);
 
 long *Generate_2p3q_Seq(int length, int *seq_size)
 {
@@ -110,7 +109,7 @@ long *Generate_2p3q_Seq(int length, int *seq_size)
     return seq;
 }
 
-int static power(int base, int power)
+static int power(int base, int power)
 {
     if (base == 0)
     {
@@ -124,8 +123,9 @@ int static power(int base, int power)
     }
     return result;
 }
+
 /**
-void static print_seq(long *seq, int seq_size)
+static void print_seq(long *seq, int seq_size)
 {
     printf("\nsequence: \n");
     for (int i = 0; i < seq_size; i++)
@@ -133,23 +133,5 @@ void static print_seq(long *seq, int seq_size)
         printf("%ld ", seq[i]);
     }
     printf("\n");
-}
-*/
-
-/*
-void check_next_level(long *seq, int *i, int p2, int p3, int length, long max)
-{
-    if (p3 > 1)
-    {
-        check_next_level(seq, i, p2 + 3, p3 - 2, length, max);
-        long num = power(2, p2 + 3) * power(3, p3 - 2);
-        if (num > max && num < length)
-        {
-            printf("--%ld-- ", num);
-            //seq[*i] = num;
-            max = num; 
-            *i += 1;
-        }
-    }
 }
 */
