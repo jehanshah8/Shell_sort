@@ -8,8 +8,8 @@
 
 //static void print_arr(long *arr, int size);
 //static bool is_sorted_arr(long* arr, int size);
-static void print_list(Node *head);
-static bool is_sorted_list(Node *head);
+//static void print_list(Node *head);
+//static bool is_sorted_list(Node *head);
 static void empty_list(Node **head);
 
 int main(int argc, char **argv)
@@ -55,8 +55,8 @@ int main(int argc, char **argv)
             //printf("after\n");
             //print_list(head);
 
-            int successful_writes = List_Save_To_File(argv[3], head);
-            printf("successfull writes = %d\n", successful_writes);
+            List_Save_To_File(argv[3], head);
+            //printf("successfull writes = %d\n", successful_writes);
 
             //bool works = is_sorted_list(head);
             //printf("%s\n", works ? "true" : "false");
@@ -103,6 +103,7 @@ static void empty_list(Node **head)
     *head = NULL;
 }
 
+/**
 static void print_list(Node *head)
 {
     while (head != NULL)
@@ -112,7 +113,9 @@ static void print_list(Node *head)
     }
     printf("\n\n");
 }
+*/
 
+/**
 static bool is_sorted_list(Node *head)
 {
     while (head->next != NULL)
@@ -125,3 +128,4 @@ static bool is_sorted_list(Node *head)
     }
     return true;
 }
+*/

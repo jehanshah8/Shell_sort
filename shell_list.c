@@ -6,7 +6,7 @@
 typedef struct List
 {
     Node *node;
-    Node *tail; 
+    Node *tail;
     struct List *next;
 } List;
 
@@ -15,7 +15,7 @@ static int calc_size(Node *head);
 static List *create_sub_lists(Node *head, int size, long k);
 static List *insert_list(List *list_tail, Node *nd);
 static Node *insertion_sort(Node *list, double *n_comp);
-static void print_sub_lists(List *sub_lists);
+//static void print_sub_lists(List *sub_lists);
 static Node *merge_sub_lists(List *sub_lists, long k);
 static void empty_sub_lists(List **sub_lists);
 
@@ -47,7 +47,7 @@ Node *List_Load_From_File(char *filename)
         nums_read += fread(&key, sizeof(long), 1, in_file_ptr);
         tail = insert_node(tail, key);
     }
-    printf("numbers read = %d\n", nums_read);
+    //printf("numbers read = %d\n", nums_read);
     fclose(in_file_ptr);
     return head;
 }
@@ -91,6 +91,7 @@ int List_Save_To_File(char *filename, Node *list)
     return successful_writes;
 }
 
+/*
 static void print_list(Node *head)
 {
     Node *curr = head;
@@ -101,6 +102,7 @@ static void print_list(Node *head)
     }
     printf("\n\n");
 }
+*/
 
 Node *List_Shellsort(Node *list, double *n_comp)
 {
@@ -110,20 +112,20 @@ Node *List_Shellsort(Node *list, double *n_comp)
 
     //printf("starting to sort\n");
     *n_comp = 0;
-    
-    List *sub_lists; 
+
+    List *sub_lists;
     List *curr_list;
     // for all k in 2p3q
-    printf("k =");
+    //printf("k =");
     for (int i = seq_size - 1; i >= 1; i--)
     {
-        printf(" %ld", seq[i]);
+        //printf(" %ld", seq[i]);
         // for a particular k
         // form the sub-lists
         sub_lists = create_sub_lists(list, size, seq[i]);
-        
+
         // unsorted sub-lists
-        //printf("unsorted sub-lists\n"); 
+        //printf("unsorted sub-lists\n");
         //print_sub_lists(sub_lists);
 
         // sort the sub list
@@ -139,7 +141,7 @@ Node *List_Shellsort(Node *list, double *n_comp)
         }
 
         // sorted sub-lists
-        //printf("sorted sub-lists\n"); 
+        //printf("sorted sub-lists\n");
         //print_sub_lists(sub_lists);
 
         // put them back together
@@ -147,7 +149,7 @@ Node *List_Shellsort(Node *list, double *n_comp)
         //print_list(list);
     }
     insertion_sort(list, n_comp);
-    printf("\nsort finished\n\n");
+    //printf("\nsort finished\n\n");
 
     free(seq);
     return list;
@@ -209,7 +211,7 @@ static List *create_sub_lists(Node *head, int size, long k)
         temp = curr_nd->next;
         curr_nd->next = NULL;
         curr_list->tail->next = curr_nd;
-        curr_list->tail = curr_list->tail->next; 
+        curr_list->tail = curr_list->tail->next;
         curr_nd = temp;
 
         //printf("next node %ld...", curr_nd->value);
@@ -241,6 +243,7 @@ static List *insert_list(List *list_tail, Node *nd)
     return list;
 }
 
+/**
 static void print_sub_lists(List *sub_lists)
 {
     List *curr_list = sub_lists;
@@ -261,6 +264,7 @@ static void print_sub_lists(List *sub_lists)
     }
     printf("\n");
 }
+*/
 
 static Node *insertion_sort(Node *head, double *n_comp)
 {
